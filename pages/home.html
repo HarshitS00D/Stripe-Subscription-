@@ -1,0 +1,155 @@
+<html>
+
+<head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+    <script>
+        fetchAccountDetails = () => {
+            let data = {
+                id: sessionStorage.getItem('id'),
+            }
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/get-sub");
+            xhttp.setRequestHeader('Content-type', 'application/json');
+            xhttp.send(JSON.stringify(data));
+            xhttp.onreadystatechange = () => {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    let res = xhttp.responseText;
+                    if (res === "no")
+                        alert("no sub");
+                    else {
+                        console.log(res);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="fetchAccountDetails()">
+    <div class="ui container" style="margin-top: 50px;">
+        <div style="float: right;">
+            <button class="ui black button" onclick="logout()">LOGOUT</button>
+        </div>
+        <!--plan status-->
+        <div>
+            <div class="ui card" style="margin-top: 60px; float: right;">
+                <div class="content">
+                    <div class="header">current subscription</div>
+                </div>
+                <div class="content">
+                    <h4 class="ui sub header">Details</h4>
+                    <div class="ui small feed">
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary" id="d1">
+                                    feature 1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary" id="d2">
+                                    feature 2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <H1> Choose Your Plan </H1>
+        <!--plan 1-->
+        <div class="ui card">
+            <div class="content">
+                <div class="header">Plan 1</div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header">Features</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 1
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 2
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <button class="ui blue button" onclick="plan(1)">Rs. 900</button>
+            </div>
+        </div>
+        <!--plan 2-->
+        <div class="ui card">
+            <div class="content">
+                <div class="header">Plan 2</div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header">Features</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 1
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 2
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                feature 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <button class="ui blue button" onclick="plan(2)">Rs. 1900</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    plan = val => {
+        if (val === 1) {
+            sessionStorage.setItem('plan', 'plan_Gij6zkKTOLakxg');
+            window.location.href = "checkout.html";
+        }
+        else {
+            sessionStorage.setItem('plan', 'plan_GijDjgynZLsrtN');
+            window.location.href = "checkout.html";
+        }
+    }
+    logout = () => {
+        sessionStorage.removeItem('plan');
+        sessionStorage.removeItem('id');
+        window.location.href = "login.html";
+    }
+
+
+</script>
+
+</html>
